@@ -101,3 +101,5 @@ ENV/
 .mypy_cache/
 .idea/
 Mechine_Learning.iml
+
+Bayes/GeographyGaussianNB/test.png
