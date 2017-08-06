@@ -1,0 +1,10 @@
+# -*- coding:utf-8
+import numpy as np
+
+X = np.array([[-1, -1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
+Y = np.array([1, 1, 1, 2, 2, 2])
+
+from sklearn import svm
+clf = svm.SVC(kernel="linear")
+clf.fit(X, Y)
+print clf.predict([[-0.8, -1]])
