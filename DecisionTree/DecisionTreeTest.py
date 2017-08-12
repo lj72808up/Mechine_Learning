@@ -20,7 +20,7 @@ bumpy_slow = [features_train[ii][1] for ii in range(0, len(features_train)) if l
 #TODO your code goes here!
 from sklearn import tree
 clf = tree.DecisionTreeClassifier()
-clf = clf.fit(features_train,labels_train)
+clf.fit(features_train,labels_train)
 
 print clf.predict(features_test)
 print clf.score(features_test,labels_test)   # 判断分类器的预测成功率  score(Test samples,True labels)
