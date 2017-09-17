@@ -8,7 +8,7 @@ from sklearn.naive_bayes import GaussianNB
 
 clf = GaussianNB()  # 创建分类器
 clf.fit(X, Y)  # 使用训练特征和训练标签填充它
-print clf.predict([[-0.8, -1]])  # 使用分类器上的预测功能创建预测向量
+print clf.predict([[-0.8, -1],[-0.8, -1]])  # 使用分类器上的预测功能创建预测向量
 # print clf.score(features_test,labels_test) #匹配度
 
 clf_pf = GaussianNB()
