@@ -1,6 +1,6 @@
 # encoding:utf-8
 # ----------
-#
+# 权重更新规则
 # In this exercise, you will update the perceptron class so that it can update
 # its weights.
 #
