@@ -1,6 +1,6 @@
 # encoding:utf-8
 # ----------
-# 权重更新规则
+# 感知器学习的权重更新规则:  (y-y^) * eta * input
 # In this exercise, you will update the perceptron class so that it can update
 # its weights.
 #
@@ -26,7 +26,7 @@ class Perceptron:
         self.threshold = threshold
 
 
-    def activate(self, values):
+    def activate(self, values):  # 激活函数逻辑
         """
         Takes in @param values, a list of numbers equal to length of weights.
         @return the output of a threshold perceptron with given inputs based on
@@ -35,6 +35,7 @@ class Perceptron:
         # First calculate the strength with which the perceptron fires
         strength = np.dot(values,self.weights)   #  矩阵乘法运算
         # Then return 0 or 1 depending on strength compared to threshold
+        print "%s * %s = %s" % (values,self.weights,strength)
         return int(strength > self.threshold)
 
 
@@ -49,22 +50,22 @@ class Perceptron:
         """
 
         # For each data point:
-        weight_update = np.array([[]])
+        # weight_update = np.array([0,0,0])
         for data_point in xrange(len(values)):  # 输入向量的个数
             # TODO: Obtain the neuron's prediction for the data_point --> values[data_point]
             prediction = self.activate(values[data_point])
             # Get the prediction accuracy calculated as (expected value - predicted value)
             # expected value = train[data_point], predicted value = prediction
             error = train[data_point] - prediction
-            row_weight_update = np.array([])
+            weight_update = np.array([])
             for i in values[data_point]:
-                row_weight_update = np.append(row_weight_update,error*eta*i)
+                weight_update = np.append(weight_update,error*eta*i)
             # TODO: update self.weights based on the multiplication of:
             # - prediction accuracy(error)
             # - learning rate(eta)
             # - input value(values[data_point])
-            weight_update = np.append(weight_update,row_weight_update)
-        self.weights += weight_update
+            print "weight update: %s" % weight_update
+            self.weights += weight_update
 
 def test():
     """
@@ -74,18 +75,19 @@ def test():
     def sum_almost_equal(array1, array2, tol = 1e-6):
         return sum(abs(array1 - array2)) < tol
 
-    p1 = Perceptron(np.array([1,1,1]),0)
-    p1.update(np.array([[2,0,-3]]), np.array([1]))
-    print p1.weights
-    assert sum_almost_equal(p1.weights, np.array([1.2, 1, 0.7]))
+    # p1 = Perceptron(np.array([1,1,1]),0)
+    # p1.update(np.array([[2,0,-3]]), np.array([1]))
+    # print p1.weights
+    # assert sum_almost_equal(p1.weights, np.array([1.2, 1, 0.7]))
 
-    # p2 = Perceptron(np.array([1,2,3]),0)
-    # p2.update(np.array([[3,2,1],[4,0,-1]]),np.array([0,0]))
-    # print p2.weights
+    p2 = Perceptron(np.array([1,2,3]),0)
+    p2.update(np.array([[3,2,1],[4,0,-1]]),np.array([0,0]))
+    print p2.weights
     # assert sum_almost_equal(p2.weights, np.array([0.7, 1.8, 2.9]))
-    #
-    # p3 = Perceptron(np.array([3,0,2]),0)
-    # p3.update(np.array([[2,-2,4],[-1,-3,2],[0,2,1]]),np.array([0,1,0]))
+
+    p3 = Perceptron(np.array([3,0,2]),0)
+    p3.update(np.array([[2,-2,4],[-1,-3,2],[0,2,1]]),np.array([0,1,0]))
+    print p3.weights
     # assert sum_almost_equal(p3.weights, np.array([2.7, -0.3, 1.7]))
 
 if __name__ == "__main__":
